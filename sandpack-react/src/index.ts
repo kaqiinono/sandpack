@@ -4,6 +4,7 @@ export * from "./presets/SandpackRunner";
 export * from "./components/CodeEditor";
 export * from "./components/CodeViewer";
 export * from "./components/FileTabs";
+export * from "./components/FileExplorer";
 export * from "./components/Navigator";
 export * from "./components/Preview";
 export * from "./components/TranspiledCode";
