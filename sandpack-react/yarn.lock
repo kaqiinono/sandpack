@@ -1222,9 +1222,9 @@
     style-mod "^4.0.0"
     w3c-keyname "^2.2.4"
 
-"@codesandbox/sandpack-client@^0.0.1":
+"@jd/sandpack-client@^0.0.1":
   version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@codesandbox/sandpack-client/-/sandpack-client-0.0.1.tgz#8119487b8ecb0df3ce7a9415a8f0d7c64c51c12c"
+  resolved "https://registry.yarnpkg.com/@jd/sandpack-client/-/sandpack-client-0.0.1.tgz#8119487b8ecb0df3ce7a9415a8f0d7c64c51c12c"
   integrity sha512-BY7zOjismRa4h2oJbXaaqclveXz0yLMHE8MJ9oUNgHVOlLzDni35/5KUDmMEUX7b15I97B+Knf19IFfKf8L54w==
   dependencies:
     codesandbox-import-utils "^1.2.3"

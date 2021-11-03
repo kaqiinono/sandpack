@@ -5,7 +5,7 @@ import type {
   SandpackError,
   SandpackMessage,
   UnsubscribeFunction,
-} from "@codesandbox/sandpack-client";
+} from "@jd/sandpack-client";
 import type { ITemplate } from "codesandbox-import-util-types";
 
 export type SandpackClientDispatch = (

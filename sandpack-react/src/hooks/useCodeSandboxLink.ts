@@ -1,4 +1,4 @@
-import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
+import type { SandpackBundlerFiles } from "@jd/sandpack-client";
 import { getParameters } from "codesandbox-import-utils/lib/api/define";
 import * as React from "react";
 

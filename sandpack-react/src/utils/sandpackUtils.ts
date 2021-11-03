@@ -1,8 +1,8 @@
 import type {
   SandpackBundlerFile,
   SandpackBundlerFiles,
-} from "@codesandbox/sandpack-client";
-import { addPackageJSONIfNeeded } from "@codesandbox/sandpack-client";
+} from "@jd/sandpack-client";
+import { addPackageJSONIfNeeded } from "@jd/sandpack-client";
 
 import type { SandpackProviderProps } from "../contexts/sandpackContext";
 import { SANDBOX_TEMPLATES } from "../templates";

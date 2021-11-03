@@ -5,11 +5,11 @@ import type {
   SandpackError,
   SandpackMessage,
   UnsubscribeFunction,
-} from "@codesandbox/sandpack-client";
+} from "@jd/sandpack-client";
 import {
   SandpackClient,
   extractErrorDetails,
-} from "@codesandbox/sandpack-client";
+} from "@jd/sandpack-client";
 import * as React from "react";
 
 import type {

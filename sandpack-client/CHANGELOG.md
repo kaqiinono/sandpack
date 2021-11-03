@@ -13,4 +13,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [0.1.16](https://github.com/codesandbox/sandpack/compare/v0.1.15...v0.1.16) (2021-11-03)
 
-**Note:** Version bump only for package @codesandbox/sandpack-client
+**Note:** Version bump only for package @jd/sandpack-client

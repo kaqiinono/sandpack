@@ -14,13 +14,13 @@ the bundler yourself.
 To use it, you have to install a different package:
 
 ```bash
-npm i @codesandbox/sandpack-client
+npm i @jd/sandpack-client
 ```
 
 or
 
 ```bash
-yarn add @codesandbox/sandpack-client
+yarn add @jd/sandpack-client
 ```
 
 ## Usage
@@ -29,7 +29,7 @@ The SandpackClient is a class implementation, you can import it from the
 package.
 
 ```js
-import { SandpackClient } from "@codesandbox/sandpack-client";
+import { SandpackClient } from "@jd/sandpack-client";
 
 // There are two ways of initializing a preview, you can give it either an
 // iframe element or a selector of an element to create an iframe on.
