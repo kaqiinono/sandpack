@@ -1,10 +1,11 @@
-import { Sandpack } from "@codesandbox/sandpack-react";
+import { Sandpack } from "@jd/sandpack-react";
 import CodeBlock from "@theme-init/CodeBlock";
 import React from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 import "./style.css";
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const RenderSandpack = (props) => {
   const { siteConfig } = useDocusaurusContext();
   const sandpackPluginOptions = siteConfig.themeConfig.sandpack;

@@ -32,7 +32,7 @@ The `SandpackProvider` accepts [the same two props](/docs/getting-started/custom
 import {
   SandpackProvider,
   SandpackPreview,
-} from "@codesandbox/sandpack-react";
+} from "@jd/sandpack-react";
 
 const CustomSandpack = () => (
   <SandpackProvider>
@@ -56,8 +56,8 @@ import {
   SandpackProvider,
   SandpackThemeProvider,
   SandpackPreview,
-} from "@codesandbox/sandpack-react";
-import "@codesandbox/sandpack-react/dist/index.css";
+} from "@jd/sandpack-react";
+import "@jd/sandpack-react/dist/index.css";
 
 const CustomSandpack = () => (
   <SandpackProvider>

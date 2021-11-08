@@ -1444,29 +1444,6 @@
     style-mod "^4.0.0"
     w3c-keyname "^2.2.4"
 
-"@codesandbox/sandpack-react@0.1.13":
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/@codesandbox/sandpack-react/-/sandpack-react-0.1.13.tgz#b4ecfae56ebc062020788996deaa6e9039cdf031"
-  integrity sha512-Y2eOg6dpEImbX5qU3Hi+cMyVlX79Hq4iYprMR8dKH1pnlCXcXBrmbup+RwCOlPDXe3vW6YcsM9Q0U7cCDlRYlA==
-  dependencies:
-    "@code-hike/classer" "^0.0.0-aa6efee"
-    "@codemirror/closebrackets" "^0.18.0"
-    "@codemirror/commands" "^0.18.0"
-    "@codemirror/comment" "^0.18.0"
-    "@codemirror/gutter" "^0.18.0"
-    "@codemirror/highlight" "^0.18.0"
-    "@codemirror/history" "^0.18.0"
-    "@codemirror/lang-css" "^0.18.0"
-    "@codemirror/lang-html" "^0.18.0"
-    "@codemirror/lang-javascript" "^0.18.0"
-    "@codemirror/language" "^0.18.0"
-    "@codemirror/matchbrackets" "^0.18.0"
-    "@codemirror/state" "^0.18.0"
-    "@codemirror/view" "^0.18.0"
-    "@jd/sandpack-client" "^0.1.13"
-    codesandbox-import-util-types "^2.2.3"
-    codesandbox-import-utils "^2.2.3"
-
 "@discoveryjs/json-ext@^0.5.3":
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.5.tgz#9283c9ce5b289a3c4f61c12757469e59377f81f3"
@@ -2171,6 +2148,27 @@
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
+
+"@jd/sandpack-react@0.1.13":
+  version "0.1.19"
+  dependencies:
+    "@code-hike/classer" "^0.0.0-aa6efee"
+    "@codemirror/closebrackets" "^0.18.0"
+    "@codemirror/commands" "^0.18.0"
+    "@codemirror/comment" "^0.18.0"
+    "@codemirror/gutter" "^0.18.0"
+    "@codemirror/highlight" "^0.18.0"
+    "@codemirror/history" "^0.18.0"
+    "@codemirror/lang-css" "^0.18.0"
+    "@codemirror/lang-html" "^0.18.0"
+    "@codemirror/lang-javascript" "^0.18.0"
+    "@codemirror/language" "^0.18.0"
+    "@codemirror/matchbrackets" "^0.18.0"
+    "@codemirror/state" "^0.18.0"
+    "@codemirror/view" "^0.18.0"
+    "@jd/sandpack-client" "^0.1.19"
+    codesandbox-import-util-types "^2.2.3"
+    codesandbox-import-utils "^2.2.3"
 
 "@jest/transform@^26.6.2":
   version "26.6.2"

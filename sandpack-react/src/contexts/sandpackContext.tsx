@@ -348,7 +348,10 @@ class SandpackProvider extends React.PureComponent<
 
   runSandpack = (): void => {
     Object.keys(this.preregisteredIframes).forEach((clientId) => {
+      console.log('clientId=',clientId)
       const iframe = this.preregisteredIframes[clientId];
+      console.warn('iframe',iframe);
+      console.warn('clientId=',clientId);
       this.clients[clientId] = this.createClient(iframe, clientId);
     });
 

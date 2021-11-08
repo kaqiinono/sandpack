@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-import { Sandpack, SandpackRunner } from "@codesandbox/sandpack-react"
+import { Sandpack, SandpackRunner } from "@jd/sandpack-react"
 
 # Custom UI
 
@@ -63,7 +63,7 @@ Your `Sandpack` instance should look like this:
 Or you can import an existing theme object and use object composition to override specific fields.
 
 ```jsx
-import { Sandpack, codesandboxDarkTheme } from "@codesandbox/sandpack-react";
+import { Sandpack, codesandboxDarkTheme } from "@jd/sandpack-react";
 
 <Sandpack
   theme={{
@@ -217,7 +217,7 @@ string that will replace the main file of the project.
 
 
 ```jsx
-import { SandpackRunner } from "@codesandbox/sandpack-react";
+import { SandpackRunner } from "@jd/sandpack-react";
 
 const code = `export default function App() {
   return <h1>Hello CodeSandbox</h1>

@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-import { Sandpack } from "@codesandbox/sandpack-react"
+import { Sandpack } from "@jd/sandpack-react"
 
 # Custom Content
 

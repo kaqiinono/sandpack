@@ -2,20 +2,20 @@
 sidebar_position: 1
 ---
 
-import { Sandpack } from "@codesandbox/sandpack-react"
+import { Sandpack } from "@jd/sandpack-react"
 
 # Install
 
 Sandpack is ready to be used in your React project. The package is published on `npm` and you can install it with:
 
 ```bash
-npm i @codesandbox/sandpack-react
+npm i @jd/sandpack-react
 ```
 
 or
 
 ```bash
-yarn add @codesandbox/sandpack-react
+yarn add @jd/sandpack-react
 ```
 
 The package contains multiple **components**, **utilities** and **typings** for diving into
@@ -25,8 +25,8 @@ We packed all the components and the bundler inside the `Sandpack` component, wh
 Additionally, there is a small **stylesheet** you need to import globally into your project.
 
 ```jsx
-import { Sandpack } from "@codesandbox/sandpack-react";
-import "@codesandbox/sandpack-react/dist/index.css";
+import { Sandpack } from "@jd/sandpack-react";
+import "@jd/sandpack-react/dist/index.css";
 
 /* JSX Usage */
 <Sandpack template="react"/>

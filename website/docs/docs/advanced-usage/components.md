@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-import { SandpackProvider, SandpackLayout, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview } from "@codesandbox/sandpack-react"
+import { SandpackProvider, SandpackLayout, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview } from "@jd/sandpack-react"
 
 # Components
 
@@ -26,7 +26,7 @@ import {
   SandpackLayout,
   SandpackCodeEditor,
   SandpackPreview,
-} from "@codesandbox/sandpack-react";
+} from "@jd/sandpack-react";
 
 const CustomSandpack = () => (
   <SandpackProvider template="react">
@@ -185,7 +185,7 @@ import {
   SandpackLayout,
   SandpackCodeEditor,
   SandpackTranspiledCode,
-} from "@codesandbox/sandpack-react";
+} from "@jd/sandpack-react";
 
 const CustomSandpack = () => (
   <SandpackProvider template="react">
