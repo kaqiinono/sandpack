@@ -1,6 +1,6 @@
 {
   "name": "custom-sandpack-react",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "description": "",
   "keywords": [],
   "repository": {
@@ -44,9 +44,9 @@
     "@codemirror/matchbrackets": "^0.18.0",
     "@codemirror/state": "^0.18.0",
     "@codemirror/view": "^0.18.0",
-    "custom-sandpack-client": "^0.1.21",
     "codesandbox-import-util-types": "^2.2.3",
-    "codesandbox-import-utils": "^2.2.3"
+    "codesandbox-import-utils": "^2.2.3",
+    "custom-sandpack-client": "^0.1.22"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
