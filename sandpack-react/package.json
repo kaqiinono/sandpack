@@ -1,5 +1,5 @@
 {
-  "name": "@jd/sandpack-react",
+  "name": "custom-sandpack-react",
   "version": "0.1.21",
   "description": "",
   "keywords": [],
@@ -44,7 +44,7 @@
     "@codemirror/matchbrackets": "^0.18.0",
     "@codemirror/state": "^0.18.0",
     "@codemirror/view": "^0.18.0",
-    "@jd/sandpack-client": "^0.1.21",
+    "custom-sandpack-client": "^0.1.21",
     "codesandbox-import-util-types": "^2.2.3",
     "codesandbox-import-utils": "^2.2.3"
   },
@@ -75,5 +75,6 @@
   "peerDependencies": {
     "react": "^16.8.0 || ^17",
     "react-dom": "^16.8.0 || ^17"
-  }
+  },
+  "gitHead": "28f26c65fc7d29314614232e487a5dede15673cf"
 }

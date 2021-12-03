@@ -6,7 +6,7 @@
     },
     "6006": {
       "name": "Storybook",
-      "command": "yarn workspace @jd/sandpack-react storybook"
+      "command": "yarn workspace custom-sandpack-react storybook"
     },
     "3000": {
       "name": "Docs",

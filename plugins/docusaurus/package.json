@@ -13,7 +13,7 @@
   "dependencies": {
     "@docusaurus/core": "2.0.0-beta.6",
     "@docusaurus/utils-validation": "2.0.0-beta.6",
-    "@jd/sandpack-react": "^0.1.21"
+    "custom-sandpack-react": "^0.1.21"
   },
   "peerDependencies": {
     "react": "^16.8.4 || ^17.0.0",
