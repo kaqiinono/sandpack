@@ -86,7 +86,7 @@ export interface SandboxInfo {
 //         "-"
 //         )}-sandpack.codesandbox.io/`;
 
-const BUNDLER_URL ='http://coder.jd.com?id=xxx'
+const BUNDLER_URL ='http://codesandbox.jd.com/sandbox/#demo'
 
 export class SandpackClient {
     selector: string | undefined;
@@ -144,7 +144,7 @@ export class SandpackClient {
         this.iframe.src = options.startRoute
             ? new URL(options.startRoute, this.bundlerURL).toString()
             : this.bundlerURL;
-        console.log('this.iframe.src', this.iframe.src);
+
         this.iframeProtocol = new IFrameProtocol(this.iframe, this.bundlerURL);
 
         this.unsubscribeGlobalListener = this.iframeProtocol.globalListen(
@@ -303,7 +303,6 @@ export class SandpackClient {
             {}
         );
 
-        console.log('begin:https://codesandbox.io/api/v1/sandboxes/define?json=1',paramFiles)
         return fetch("https://codesandbox.io/api/v1/sandboxes/define?json=1", {
             method: "POST",
             body: JSON.stringify({files: paramFiles}),
@@ -314,7 +313,6 @@ export class SandpackClient {
         })
             .then((x) => x.json())
             .then((res: { sandbox_id: string }) => {
-                console.log('get:https://codesandbox.io/api/v1/sandboxes/define?json=1',res)
                return ({
                     sandboxId: res.sandbox_id,
                     editorUrl: `https://codesandbox.io/s/${res.sandbox_id}`,
