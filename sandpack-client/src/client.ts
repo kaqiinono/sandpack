@@ -303,7 +303,7 @@ export class SandpackClient {
             {}
         );
 
-        return fetch("https://codesandbox.io/api/v1/sandboxes/define?json=1", {
+        return fetch("http://codesandbox.jd.com/coder/create", {
             method: "POST",
             body: JSON.stringify({files: paramFiles}),
             headers: {
@@ -312,11 +312,11 @@ export class SandpackClient {
             },
         })
             .then((x) => x.json())
-            .then((res: { sandbox_id: string }) => {
+            .then((res: { alias: string }) => {
                return ({
-                    sandboxId: res.sandbox_id,
-                    editorUrl: `https://codesandbox.io/s/${res.sandbox_id}`,
-                    embedUrl: `https://codesandbox.io/embed/${res.sandbox_id}`,
+                    sandboxId: res.alias,
+                    editorUrl: `http://codesandbox.jd.com/code/space/${res.alias}`,
+                    embedUrl: `http://codesandbox.jd.com/sandbox/#${res.alias}`,
                 })
             });
     }
