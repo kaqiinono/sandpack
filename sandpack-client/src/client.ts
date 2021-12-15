@@ -86,7 +86,7 @@ export interface SandboxInfo {
 //         "-"
 //         )}-sandpack.codesandbox.io/`;
 
-const BUNDLER_URL ='http://codesandbox.jd.com/sandbox/#demo'
+const BUNDLER_URL ='http://codesandbox.jd.com'
 
 export class SandpackClient {
     selector: string | undefined;

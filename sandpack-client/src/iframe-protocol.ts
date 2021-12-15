@@ -17,7 +17,7 @@ export class IFrameProtocol {
 
     constructor(iframe: HTMLIFrameElement, origin: string) {
         this.frameWindow = iframe.contentWindow;
-        this.origin = '*'; // origin;
+        this.origin = origin;
         this.globalListeners = [];
         this.channelListeners = [];
 
