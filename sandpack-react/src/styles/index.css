@@ -9,6 +9,7 @@
   --sp-colors-accent: #64d2ff;
   --sp-colors-bg-error: #ffcdca;
   --sp-colors-fg-error: #811e18;
+  --sp-layout-height: 300px;
 
   --sp-font-size: 14px;
   --sp-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -50,6 +51,37 @@
   box-sizing: border-box;
 }
 
+.sp-wrapper:focus {
+  outline: 0;
+}
+
+.sp-wrapper *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.sp-wrapper *::-webkit-scrollbar-track {
+  background-color: var(--sp-colors-bg-default);
+}
+
+.sp-wrapper *::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.sp-wrapper *::-webkit-scrollbar-thumb {
+  background-color: var(--sp-colors-fg-default);
+  border-radius: 9999px;
+  opacity: 0;
+}
+
+.sp-wrapper *::-webkit-scrollbar-thumb:hover {
+  opacity: 1;
+}
+
+.sp-wrapper *::-webkit-scrollbar-track {
+  border-left: 1px solid var(--sp-colors-fg-inactive);
+}
+
 .sp-layout {
   border: 1px solid var(--sp-colors-fg-inactive);
   display: flex;
@@ -75,7 +107,14 @@
   flex-shrink: 1;
   flex-basis: 0;
   min-width: 350px;
-  height: 300px;
+  height: var(--sp-layout-height);
+}
+
+@media print {
+  .sp-layout > .sp-stack {
+    height: auto;
+    display: block;
+  }
 }
 
 .sp-layout > *:not(:first-child) {
@@ -106,7 +145,7 @@
   font-family: var(--sp-font-mono);
   font-size: var(--sp-font-size);
   color: var(--sp-colors-fg-active);
-  line-height: 1.4;
+  line-height: var(--sp-line-height);
 }
 
 .sp-code-editor {
@@ -136,10 +175,6 @@
 .sp-cm:focus-visible .cm-gutter.cm-lineNumbers {
   padding-left: 0;
   padding-right: var(--sp-space-2);
-}
-
-.sp-cm .cm-scroller:focus {
-  outline: 0;
 }
 
 .sp-transpiled-code {
@@ -172,7 +207,7 @@
   display: flex;
   flex-wrap: nowrap;
   align-items: stretch;
-  height: 40px;
+  min-height: 40px;
   margin-bottom: -1px;
 }
 
@@ -335,6 +370,7 @@
   border-radius: var(--sp-border-radius);
   border: 1px solid var(--sp-colors-fg-inactive);
   height: 24px;
+  line-height: 24px;
   font-size: inherit;
   outline: none;
   flex: 1;
@@ -474,4 +510,9 @@
 .sp-error-message {
   animation: sp-fade-in 0.15s ease-in;
   color: var(--sp-colors-fg-error);
+}
+
+.sp-devtools {
+  height: var(--sp-layout-height);
+  width: 100%;
 }

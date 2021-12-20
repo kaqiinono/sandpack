@@ -1,8 +1,8 @@
 import type {
   SandpackBundlerFile,
   SandpackBundlerFiles,
-} from "@jd/sandpack-client";
-import { addPackageJSONIfNeeded } from "@jd/sandpack-client";
+} from "@codesandbox/sandpack-client";
+import { addPackageJSONIfNeeded } from "@codesandbox/sandpack-client";
 
 import type { SandpackProviderProps } from "../contexts/sandpackContext";
 import { SANDBOX_TEMPLATES } from "../templates";
@@ -56,7 +56,13 @@ export const getSandpackStateFromProps = (
 
   if (openPaths.length === 0) {
     // If no files are received, use the project setup / template
-    openPaths = Object.keys(projectSetup.files);
+    openPaths = Object.keys(projectSetup.files).reduce<string[]>((acc, key) => {
+      if (!projectSetup.files[key].hidden) {
+        acc.push(key);
+      }
+
+      return acc;
+    }, []);
   }
 
   // If no activePath is specified, use the first open file
@@ -78,6 +84,7 @@ export const getSandpackStateFromProps = (
   const files = addPackageJSONIfNeeded(
     projectSetup.files,
     projectSetup.dependencies || {},
+    projectSetup.devDependencies || {},
     projectSetup.entry
   );
 
@@ -130,13 +137,17 @@ export const getSetup = (
       ...baseTemplate.dependencies,
       ...setup.dependencies,
     },
+    devDependencies: {
+      ...baseTemplate.devDependencies,
+      ...setup.devDependencies,
+    },
     entry: setup.entry || baseTemplate.entry,
     main: setup.main || baseTemplate.main,
     environment: setup.environment || baseTemplate.environment,
   };
 };
 
-const createSetupFromUserInput = (
+export const createSetupFromUserInput = (
   setup?: SandpackSetup
 ): Partial<SandboxTemplate> | null => {
   if (!setup) {

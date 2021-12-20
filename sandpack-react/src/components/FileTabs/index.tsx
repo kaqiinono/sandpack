@@ -5,17 +5,20 @@ import { useSandpack } from "../../hooks/useSandpack";
 import { CloseIcon } from "../../icons";
 import { getFileName } from "../../utils/stringUtils";
 
-interface FileTabsProps {
+export interface FileTabsProps {
   closableTabs?: boolean;
 }
 
-export const FileTabs: React.FC<FileTabsProps> = ({ closableTabs }) => {
+/**
+ * @category Components
+ */
+export const FileTabs = ({ closableTabs }: FileTabsProps): JSX.Element => {
   const { sandpack } = useSandpack();
   const c = useClasser("sp");
 
   const { activePath, openPaths, setActiveFile } = sandpack;
 
-  const handleCloseFile = (ev: React.MouseEvent<HTMLDivElement>) => {
+  const handleCloseFile = (ev: React.MouseEvent<HTMLDivElement>): void => {
     ev.stopPropagation();
     const tabElm = (ev.target as HTMLElement).closest(
       "[data-active]"
@@ -28,7 +31,7 @@ export const FileTabs: React.FC<FileTabsProps> = ({ closableTabs }) => {
   };
 
   return (
-    <div className={c("tabs")}>
+    <div className={c("tabs")} translate="no">
       <div
         aria-label="Select active file"
         className={c("tabs-scrollable-container")}
@@ -40,7 +43,7 @@ export const FileTabs: React.FC<FileTabsProps> = ({ closableTabs }) => {
             aria-selected={filePath === activePath}
             className={c("tab-button")}
             data-active={filePath === activePath}
-            onClick={() => setActiveFile(filePath)}
+            onClick={(): void => setActiveFile(filePath)}
             role="tab"
             title={filePath}
             type="button"

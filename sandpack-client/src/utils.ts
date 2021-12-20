@@ -8,6 +8,7 @@ import type {
 
 export function createPackageJSON(
   dependencies: Dependencies = {},
+  devDependencies: Dependencies = {},
   entry = "/index.js"
 ): string {
   return JSON.stringify(
@@ -15,6 +16,7 @@ export function createPackageJSON(
       name: "sandpack-project",
       main: entry,
       dependencies,
+      devDependencies,
     },
     null,
     2
@@ -24,6 +26,7 @@ export function createPackageJSON(
 export function addPackageJSONIfNeeded(
   files: SandpackBundlerFiles,
   dependencies?: Dependencies,
+  devDependencies?: Dependencies,
   entry?: string
 ): SandpackBundlerFiles {
   const newFiles = { ...files };
@@ -42,7 +45,7 @@ export function addPackageJSONIfNeeded(
     }
 
     newFiles["/package.json"] = {
-      code: createPackageJSON(dependencies, entry),
+      code: createPackageJSON(dependencies, devDependencies, entry),
     };
   }
 
@@ -78,7 +81,9 @@ export function extractErrorDetails(msg: SandpackErrorMessage): SandpackError {
   };
 }
 
-function getRelevantStackFrame(frames?: ErrorStackFrame[]) {
+function getRelevantStackFrame(
+  frames?: ErrorStackFrame[]
+): ErrorStackFrame | undefined {
   if (!frames) {
     return;
   }
@@ -86,17 +91,17 @@ function getRelevantStackFrame(frames?: ErrorStackFrame[]) {
   return frames.find((frame) => !!frame._originalFileName);
 }
 
-function getErrorLocation(errorFrame: ErrorStackFrame) {
+function getErrorLocation(errorFrame: ErrorStackFrame): string {
   return errorFrame
     ? ` (${errorFrame._originalLineNumber}:${errorFrame._originalColumnNumber})`
     : ``;
 }
 
-function getErrorInOriginalCode(errorFrame: ErrorStackFrame) {
+function getErrorInOriginalCode(errorFrame: ErrorStackFrame): string {
   const lastScriptLine =
     errorFrame._originalScriptCode[errorFrame._originalScriptCode.length - 1];
-  const numberOfLineNumberCharacters = lastScriptLine.lineNumber.toString()
-    .length;
+  const numberOfLineNumberCharacters =
+    lastScriptLine.lineNumber.toString().length;
 
   const leadingCharacterOffset = 2;
   const barSeparatorCharacterOffset = 3;
@@ -135,7 +140,7 @@ function formatErrorMessage(
   message: string,
   location: string,
   errorInCode: string
-) {
+): string {
   return `${filePath}: ${message}${location}
 ${errorInCode}`;
 }

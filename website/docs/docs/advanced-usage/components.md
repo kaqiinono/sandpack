@@ -2,7 +2,8 @@
 sidebar_position: 2
 ---
 
-import { SandpackProvider, SandpackLayout, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview } from "@jd/sandpack-react"
+import { Sandpack, SandpackProvider, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview } from "@codesandbox/sandpack-react"
+import { SandpackLayout } from "../../src/CustomSandpack"
 
 # Components
 
@@ -26,7 +27,7 @@ import {
   SandpackLayout,
   SandpackCodeEditor,
   SandpackPreview,
-} from "@jd/sandpack-react";
+} from "@codesandbox/sandpack-react";
 
 const CustomSandpack = () => (
   <SandpackProvider template="react">
@@ -45,7 +46,7 @@ const CustomSandpack = () => (
   </SandpackLayout>
 </SandpackProvider>
 
-And now we have pretty much the same component as the preset, minus the prop
+Further now we have pretty much the same component as the preset, minus the prop
 passing, which you can decide based on your specific needs.
 
 You can easily swap the two components inside the `SandpackLayout` to get a different instance of `Sandpack`.
@@ -66,7 +67,7 @@ You can easily swap the two components inside the `SandpackLayout` to get a diff
   </SandpackLayout>
 </SandpackProvider>
 
-`SandpackLayout` accepts a `theme` prop, so you can pass in your [custom theme object or a predefined theme](/docs/getting-started/custom-ui#theming).
+`SandpackLayout` accepts a `theme` prop, so you can pass in your [custom theme object or a predefined theme](/getting-started/custom-ui#theming).
 
 :::note Reminder
 If you do not want to use the `SandpackLayout` but still want to have style applied to the `sandpack` components according to the theme,
@@ -154,7 +155,7 @@ If you played with the `Sandpack` preset, you should be familiar already with th
 
 ## Code Viewer
 
-For situations when you strictly want to show some code and run it in the browser, you can use the `SandpackCodeViewer` component. It looks similar to the code editor, but it renders a readonly version of `codemirror`, so users will not be able to edit the code.
+For situations when you strictly want to show some code and run it in the browser, you can use the `SandpackCodeViewer` component. It looks similar to the code editor, but it renders a read-only version of `codemirror`, so users will not be able to edit the code.
 
 ```jsx
 <SandpackProvider template="react">
@@ -172,6 +173,69 @@ For situations when you strictly want to show some code and run it in the browse
   </SandpackLayout>
 </SandpackProvider>
 
+## ReactDevTools
+
+Sandpack also provides a component that adds React DevTools, allowing you to inspect the React component hierarchies in the iframe. This is useful for `props` debugging and understanding the component tree. Our `SandpackReactDevTools` component has the same functionality as the React DevTools browser extensions, but it only shows what is in your Sandpack instance.
+
+<!-- prettier-ignore -->
+<div className="nestedSandpack">
+  <Sandpack
+    theme="sandpack-dark"
+    customSetup={{
+      dependencies: { "@codesandbox/sandpack-react": "latest" },
+    }}
+    files={{
+      "/App.js": `import {
+  SandpackProvider,
+  SandpackLayout,
+  SandpackPreview,
+  SandpackReactDevTools,
+} from "@codesandbox/sandpack-react";
+import "@codesandbox/sandpack-react/dist/index.css";\n
+export default function CustomSandpack() {
+  return (
+    <SandpackProvider template="react">
+      <SandpackLayout>
+        <div style={{ display: "flex", width: "100%" }}>
+          <SandpackPreview />
+          <SandpackReactDevTools />
+        </div>
+      </SandpackLayout>
+    </SandpackProvider>
+  )
+}`
+    }}
+    template="react"
+  />
+</div>
+
+## OpenInCodeSandboxButton
+
+You can build a custom button that creates a new sandbox from the sandpack files. It will include any edits made in the Sandpack editor, so it is a great way to persist your changes. The created sandbox will open on [CodeSandbox](https://codesandbox.io) in a new tab.
+
+Let's use the `UnstyledOpenInCodeSandboxButton` as an example:
+
+```jsx
+import {
+  SandpackProvider,
+  SandpackLayout,
+  SandpackCodeEditor,
+  UnstyledOpenInCodeSandboxButton,
+} from "@codesandbox/sandpack-react";
+const CustomSandpack = () => (
+  <SandpackProvider template="react">
+    <SandpackLayout>
+      <SandpackCodeEditor />
+      <UnstyledOpenInCodeSandboxButton>
+        Open in CodeSandbox
+      </UnstyledOpenInCodeSandboxButton>
+    </SandpackLayout>
+  </SandpackProvider>
+);
+```
+
+The `UnstyledOpenInCodeSandboxButton` is a basic component that does not carry any styles. If you want a ready-to-use component, use the `OpenInCodeSandboxButton` instead, which has the same functionality but includes the CodeSandbox logo.
+
 ## Other components
 
 You can also bring other components in the mix: `SandpackTranspiledCode`, `FileTabs`, `FileExplorer`, `Navigator` and so on.
@@ -185,7 +249,7 @@ import {
   SandpackLayout,
   SandpackCodeEditor,
   SandpackTranspiledCode,
-} from "@jd/sandpack-react";
+} from "@codesandbox/sandpack-react";
 
 const CustomSandpack = () => (
   <SandpackProvider template="react">

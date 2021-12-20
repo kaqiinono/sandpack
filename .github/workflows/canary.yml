@@ -1,4 +1,4 @@
-name: Release (Canary)
+name: Release (beta)
 
 on:
   push:
@@ -10,6 +10,7 @@ jobs:
     name: Build bundler
     if: github.event_name == 'push' && github.ref == 'refs/heads/next'
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - name: Setup | Clone codesandbox-client
@@ -61,7 +62,7 @@ jobs:
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "12.22.4"
+          node-version: "14.16.1"
 
       - name: Setup | Authenticate with Registry
         run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
@@ -89,8 +90,11 @@ jobs:
 
       - name: Prepare | Build
         run: |
-          yarn workspace @jd/sandpack-client build:publish
-          yarn workspace @jd/sandpack-react build:publish
+          yarn workspace @codesandbox/sandpack-client build:publish 
+          yarn workspace @codesandbox/sandpack-react build:publish
+
+      - name: Prepare | Lerna Version
+        run: lerna version --conventional-commits --conventional-prerelease --yes
 
       - name: Release | Lerna Publish
         run: lerna publish from-package --yes --canary

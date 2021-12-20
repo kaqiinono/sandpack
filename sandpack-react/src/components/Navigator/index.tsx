@@ -11,10 +11,13 @@ export interface NavigatorProps {
   onURLChange?: (newURL: string) => void;
 }
 
-export const Navigator: React.FC<NavigatorProps> = ({
+/**
+ * @category Components
+ */
+export const Navigator = ({
   clientId,
   onURLChange,
-}) => {
+}: NavigatorProps): JSX.Element => {
   const [baseUrl, setBaseUrl] = React.useState<string>("");
   const { sandpack, dispatch, listen } = useSandpack();
 
@@ -41,10 +44,11 @@ export const Navigator: React.FC<NavigatorProps> = ({
       }
     }, clientId);
 
-    return () => unsub();
+    return (): void => unsub();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const path = e.target.value.startsWith("/")
       ? e.target.value
       : `/${e.target.value}`;
@@ -52,7 +56,7 @@ export const Navigator: React.FC<NavigatorProps> = ({
     setRelativeUrl(path);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.code === "Enter") {
       //  Enter
       e.preventDefault();
@@ -64,15 +68,15 @@ export const Navigator: React.FC<NavigatorProps> = ({
     }
   };
 
-  const handleRefresh = () => {
+  const handleRefresh = (): void => {
     dispatch({ type: "refresh" });
   };
 
-  const handleBack = () => {
+  const handleBack = (): void => {
     dispatch({ type: "urlback" });
   };
 
-  const handleForward = () => {
+  const handleForward = (): void => {
     dispatch({ type: "urlforward" });
   };
 

@@ -7,14 +7,15 @@ export type LoadingOverlayState = "visible" | "fading" | "hidden" | "timeout";
 const FADE_DELAY = 1000; // 1 second delay one initial load, only relevant if the loading overlay is visible.
 const FADE_ANIMATION_DURATION = 500; // 500 ms fade animation
 
+/**
+ * @category Hooks
+ */
 export const useLoadingOverlayState = (
   clientId?: string
 ): LoadingOverlayState => {
   const { sandpack, listen } = useSandpack();
-  const [
-    loadingOverlayState,
-    setLoadingOverlayState,
-  ] = React.useState<LoadingOverlayState>("visible");
+  const [loadingOverlayState, setLoadingOverlayState] =
+    React.useState<LoadingOverlayState>("visible");
 
   React.useEffect(() => {
     sandpack.loadingScreenRegisteredRef.current = true;
@@ -39,11 +40,12 @@ export const useLoadingOverlayState = (
       }
     }, clientId);
 
-    return () => {
+    return (): void => {
       clearTimeout(outerHook);
       clearTimeout(innerHook);
       unsub();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (sandpack.status === "timeout") {

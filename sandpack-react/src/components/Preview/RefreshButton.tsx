@@ -4,11 +4,16 @@ import * as React from "react";
 import { useSandpackNavigation } from "../../hooks/useSandpackNavigation";
 import { RefreshIcon } from "../../icons";
 
-export interface RefreshButtonProps {
+interface RefreshButtonProps {
   clientId?: string;
 }
 
-export const RefreshButton: React.FC<RefreshButtonProps> = ({ clientId }) => {
+/**
+ * @category Components
+ */
+export const RefreshButton = ({
+  clientId,
+}: RefreshButtonProps): JSX.Element => {
   const { refresh } = useSandpackNavigation(clientId);
   const c = useClasser("sp");
 

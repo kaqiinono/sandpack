@@ -100,5 +100,16 @@ dist
 
 # TernJS port file
 .tern-port
-/.husky/*
-.idea/*
+
+# IDEs
+.idea
+
+# Mac
+.DS_Store
+
+# Autogenerate docs
+website/docs/docs/api/client
+website/docs/docs/api/react
+
+cypress/videos
+cypress/screenshots

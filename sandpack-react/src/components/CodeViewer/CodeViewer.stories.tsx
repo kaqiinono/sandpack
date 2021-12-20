@@ -1,5 +1,5 @@
 import type { Story } from "@storybook/react";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import * as React from "react";
 
 import { SandpackProvider } from "../../contexts/sandpackContext";
 import { SandpackThemeProvider } from "../../contexts/themeContext";
@@ -54,39 +54,13 @@ export const ReactCode: React.FC = () => (
 
 export const VueCode: React.FC = () => (
   <SandpackProvider template="vue">
-    <SandpackThemeProvider theme="codesandbox-dark">
+    <SandpackThemeProvider theme="dark">
       <SandpackCodeViewer />
     </SandpackThemeProvider>
   </SandpackProvider>
 );
 
 export const Decorators: React.FC = () => {
-  const [itemClick, setItemClicked] = useState();
-  const ref = useRef<HTMLDivElement>();
-
-  useEffect(() => {
-    const handle = (event) => {
-      let id = event.target.dataset.id;
-
-      if (!id) {
-        id = event.target.parentElement.dataset.id;
-      }
-
-      setItemClicked(id);
-    };
-    const node = ref.current;
-
-    node?.querySelectorAll(".widget").forEach((element) => {
-      element.addEventListener("click", handle);
-    });
-
-    return () => {
-      node?.querySelectorAll(".widget").forEach((element) => {
-        element.removeEventListener("click", handle);
-      });
-    };
-  });
-
   return (
     <SandpackProvider
       customSetup={{
@@ -145,10 +119,8 @@ export default function List() {
       }
       `}
       </style>
-      {itemClick && <p>Widget clicked: {itemClick}</p>}
       <SandpackThemeProvider>
         <SandpackCodeViewer
-          ref={ref}
           decorators={[
             { className: "highlight", line: 1 },
             { className: "highlight", line: 9 },
@@ -167,7 +139,7 @@ export default function List() {
               endColumn: 17,
             },
           ]}
-          showLineNumbers
+          showLineNumbers={false}
         />
       </SandpackThemeProvider>
     </SandpackProvider>

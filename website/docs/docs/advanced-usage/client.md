@@ -14,13 +14,13 @@ the bundler yourself.
 To use it, you have to install a different package:
 
 ```bash
-npm i @jd/sandpack-client
+npm i @codesandbox/sandpack-client
 ```
 
 or
 
 ```bash
-yarn add @jd/sandpack-client
+yarn add @codesandbox/sandpack-client
 ```
 
 ## Usage
@@ -29,7 +29,7 @@ The SandpackClient is a class implementation, you can import it from the
 package.
 
 ```js
-import { SandpackClient } from "@jd/sandpack-client";
+import { SandpackClient } from "@codesandbox/sandpack-client";
 
 // There are two ways of initializing a preview, you can give it either an
 // iframe element or a selector of an element to create an iframe on.
@@ -66,7 +66,7 @@ client.updatePreview({
 });
 ```
 
-If you specify a `package.json` in the list of files we will use that as source
+If a `package.json` has been specified in the list of files that will be used as a source
 of truth. Otherwise, we infer `dependencies` and `entry` from it:
 
 ```js
@@ -138,6 +138,10 @@ to render inside the iframe:
 ```ts
 {
   /**
+   * Paths to external resources
+   */
+  externalResources?: string[];
+  /**
    * Location of the bundler. Defaults to `${version}-sandpack.codesandbox.io`
    */
   bundlerURL?: string;
@@ -166,7 +170,7 @@ The client instance has several helper functions you can call.
 
 #### `updatePreview`
 
-Send new content like files and dependencies, to the preview. It will
+Send new content like files and dependencies to the preview. It will
 automatically hot update the preview with the new files and options. Accepts a
 single argument `sandboxInfo` of type `SandboxInfo`.
 

@@ -1,18 +1,24 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { createThemeObject, codesandboxLightTheme } from "../themes";
+import { createThemeObject, defaultLight } from "../themes";
 import type { SandpackTheme, SandpackThemeProp } from "../types";
 import { injectThemeStyleSheet } from "../utils/domUtils";
 
+/**
+ * @hidden
+ */
 const SandpackThemeContext = React.createContext<{
   theme: SandpackTheme;
   id: string;
 }>({
-  theme: codesandboxLightTheme,
-  id: "codesandbox-light",
+  theme: defaultLight,
+  id: "light",
 });
 
+/**
+ * @category Theme
+ */
 const SandpackThemeProvider: React.FC<{
   theme?: SandpackThemeProp;
 }> = (props) => {
@@ -35,6 +41,9 @@ const SandpackThemeProvider: React.FC<{
   );
 };
 
+/**
+ * @hidden
+ */
 const SandpackThemeConsumer = SandpackThemeContext.Consumer;
 
 export { SandpackThemeProvider, SandpackThemeConsumer, SandpackThemeContext };

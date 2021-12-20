@@ -2,11 +2,11 @@ import type {
   BundlerState,
   ListenerFunction,
   SandpackBundlerFiles,
+  SandpackClient,
   SandpackError,
   SandpackMessage,
   UnsubscribeFunction,
-} from "@jd/sandpack-client";
-import type { ITemplate } from "codesandbox-import-util-types";
+} from "@codesandbox/sandpack-client";
 
 export type SandpackClientDispatch = (
   msg: SandpackMessage,
@@ -33,6 +33,8 @@ export interface SandpackState {
   files: SandpackBundlerFiles;
   environment?: SandboxEnvironment;
   status: SandpackStatus;
+  initMode: SandpackInitMode;
+  clients: Record<string, SandpackClient>;
 
   runSandpack: () => void;
   registerBundler: (iframe: HTMLIFrameElement, clientId: string) => void;
@@ -45,6 +47,7 @@ export interface SandpackState {
   setActiveFile: (path: string) => void;
   resetFile: (path: string) => void;
   resetAllFiles: () => void;
+  registerReactDevTools: () => void;
 
   // Element refs
   // Different components inside the SandpackProvider might register certain elements of interest for sandpack
@@ -68,8 +71,9 @@ export type SandpackStatus =
 export type EditorState = "pristine" | "dirty";
 
 export interface SandboxTemplate {
-  files: SandpackBundlerFiles;
+  files: Record<string, SandpackFile>;
   dependencies: Record<string, string>;
+  devDependencies?: Record<string, string>;
   entry: string;
   main: string;
   environment: SandboxEnvironment;
@@ -84,6 +88,15 @@ export interface SandpackFile {
 export type SandpackFiles = Record<string, string | SandpackFile>;
 
 export interface SandpackSetup {
+  /**
+   * Examples:
+   * ```js
+   * {
+   *  "react": "latest",
+   *  "@material-ui/core": "4.12.3",
+   * }
+   * ```
+   */
   dependencies?: Record<string, string>;
   entry?: string;
   main?: string;
@@ -91,18 +104,63 @@ export interface SandpackSetup {
   environment?: SandboxEnvironment;
 }
 
-export type SandboxEnvironment = ITemplate;
+/**
+ * `immediate`: It immediately mounts all components, such as the code-editor
+ * and the preview - this option might overload the memory usage
+ * and resource from the browser on a page with multiple instances;
+ *
+ * `lazy`: Only initialize the components when the user is about to scroll
+ * them to the viewport and keep these components mounted until the user
+ * leaves the page - this is the default value;
+ *
+ * `user-visible`: Only initialize the components when the user is about
+ * to scroll them to the viewport, but differently from lazy, this option
+ * unmounts those components once it's no longer in the viewport.
+ */
+export type SandpackInitMode = "immediate" | "lazy" | "user-visible";
+
+export type SandboxEnvironment =
+  | "adonis"
+  | "vue-cli"
+  | "preact-cli"
+  | "svelte"
+  | "create-react-app-typescript"
+  | "create-react-app"
+  | "angular-cli"
+  | "parcel"
+  | "@dojo/cli-create-app"
+  | "cxjs"
+  | "gatsby"
+  | "nuxt"
+  | "next"
+  | "reason"
+  | "apollo"
+  | "sapper"
+  | "ember"
+  | "nest"
+  | "static"
+  | "styleguidist"
+  | "gridsome"
+  | "vuepress"
+  | "mdx-deck"
+  | "quasar"
+  | "docusaurus"
+  | "node";
 
 export type SandpackPredefinedTemplate =
   | "angular"
   | "react"
+  | "react-ts"
   | "vanilla"
+  | "vanilla-ts"
   | "vue"
-  | "vue3";
+  | "vue3"
+  | "svelte";
 
 export type SandpackPredefinedTheme =
-  | "codesandbox-light"
-  | "codesandbox-dark"
+  | "light"
+  | "dark"
+  | "sandpack-dark"
   | "night-owl"
   | "aqua-blue"
   | "github-light"
@@ -168,6 +226,9 @@ export type SandpackThemeProp =
   | SandpackPartialTheme
   | "auto";
 
+/**
+ * @hidden
+ */
 export type DeepPartial<Type> = {
   [Property in keyof Type]?: DeepPartial<Type[Property]>;
 };

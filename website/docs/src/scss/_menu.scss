@@ -1,0 +1,131 @@
+.menu {
+  padding: 1.5rem 0 !important;
+}
+
+@media (min-width: 961px) {
+  .menu {
+    padding: 1.5rem 0 1.5rem 1rem !important;
+    height: calc(100% - 110px);
+    flex-grow: 0;
+  }
+}
+
+.menu__list {
+  padding-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .menu__link {
+    border-radius: 0;
+    height: auto !important;
+    font-size: 16px;
+    line-height: 1.1;
+
+    &:hover {
+      background: transparent;
+      color: var(--sandpack-text-color);
+    }
+
+    &.menu__link--active {
+      color: inherit;
+    }
+  }
+
+  .menu__list {
+    margin-left: 0;
+
+    --ifm-menu-color: var(--sandpack-text-secondary-color);
+
+    .menu__link {
+      font-size: 14px;
+
+      &.menu__link--active {
+        color: var(--sandpack-primary-color);
+      }
+    }
+  }
+}
+
+.discord-link svg,
+.twitter-link svg,
+.releases-link svg,
+.github-link svg {
+  display: none;
+}
+
+.divisor {
+  content: "";
+  flex: 1;
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (min-width: 961px) {
+  .discord-link,
+  .twitter-link,
+  .releases-link,
+  .github-link {
+    background: var(--sandpack-background-color);
+    width: var(--doc-sidebar-width);
+  }
+
+  .discord-link {
+    padding-bottom: 15px;
+  }
+  .twitter-link {
+    bottom: 45px;
+  }
+
+  .github-link {
+    bottom: 75px;
+  }
+  .releases-link {
+    bottom: 105px;
+  }
+  .discord-link .menu__link,
+  .twitter-link .menu__link,
+  .releases-link .menu__link,
+  .github-link .menu__link {
+    font-size: 14px !important;
+  }
+}
+
+.menu__list-item {
+  .menu__list-item {
+    margin-top: 0;
+
+    .menu__list-item {
+      margin-left: 1em;
+    }
+  }
+
+  .menu__link--sublist {
+    padding-bottom: 0;
+  }
+
+  .menu__link--sublist:after {
+    background: var(--ifm-menu-link-sublist-icon) 50% / 1.2rem 1.2rem;
+  }
+
+  > .menu__list-item {
+    margin-left: 0em;
+  }
+}
+
+.iconExternalLink__-_-node_modules-\@docusaurus-theme-classic-lib-next-theme-IconExternalLink-styles-module {
+  display: none;
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  background-color: transparent;
+}
+
+.theme-doc-sidebar-item-category-level-1 {
+  padding-bottom: 1rem;
+}
+
+.tocCollapsibleContent__-_-node_modules-\@docusaurus-theme-classic-lib-next-theme-TOCCollapsible-styles-module
+  > ul {
+  border-top: none !important;
+}

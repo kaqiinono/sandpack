@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-import { SandpackProvider, SandpackLayout, SandpackCodeEditor } from "@jd/sandpack-react"
+import { SandpackProvider, SandpackLayout, SandpackCodeEditor } from "@codesandbox/sandpack-react"
 
 # Hooks
 
@@ -23,7 +23,7 @@ Keep in mind that the `useSandpack` hook only works inside the `<SandpackProvide
 Let's build a code viewer component that renders a standard `pre` tag:
 
 ```jsx
-import { useSandpack } from "@jd/sandpack-react";
+import { useSandpack } from "@codesandbox/sandpack-react";
 
 const SimpleCodeViewer = () => {
   const { sandpack } = useSandpack();
@@ -61,27 +61,30 @@ We can test this with the `CustomSandpack` we implemented at the previous step.
 
 If you run this, you will notice that the `SimpleCodeViewer` is in sync with the state of the `SandpackCodeEditor`.
 
-`useSandpack` also exports `dispatch` and `listen`, two functions with which you
-can directly communicate with the bundler. However, at this point, you'd have to
-understand all the different types of messages and payloads that are passed from
+`useSandpack` also exports `dispatch` and `listen`, you can levarage these functions for communicating directly with the bundler. However, at this point, you'd have
+understood all the different types of messages and payloads that are passed from
 the sandpack manager to the iframe and back.
 
 ```jsx
-import { useSandpack } from "@jd/sandpack-react";
+import { useSandpack } from "@codesandbox/sandpack-react";
 
 const CustomRefreshButton = () => {
   const { dispatch, listen } = useSandpack();
 
   const handleRefresh = () => {
-    // listens for any message dispatched between sandpack and the bundler
-    const stopListening = listen((message) => console.log(message));
-
     // sends the refresh message to the bundler, should be logged by the listener
     dispatch({ type: "refresh" });
-
-    // unsubscribe
-    stopListening();
   };
+
+  useEffect(() => {
+    // listens for any message dispatched between sandpack and the bundler
+    const stopListening = listen((msg) => console.log(msg));
+
+    return () => {
+      // unsubscribe
+      stopListening();
+    };
+  }, [listen]);
 
   return (
     <button type="button" onClick={handleRefresh}>
@@ -114,7 +117,7 @@ the shape of the **state** object and the **dispatch/listen** functions.
 The refresh button can be built with the `useSandpackNavigation` hook:
 
 ```jsx
-import { useSandpackNavigation } from "@jd/sandpack-react";
+import { useSandpackNavigation } from "@codesandbox/sandpack-react";
 
 const CustomRefreshButton = () => {
   const { refresh } = useSandpackNavigation();
@@ -122,24 +125,6 @@ const CustomRefreshButton = () => {
     <button type="button" onClick={() => refresh()}>
       Refresh Sandpack
     </button>
-  );
-};
-```
-
-## useCodeSandboxLink
-
-Similarly, we can build a custom link that opens the sandpack files in a new tab
-on https://codesandbox.io. Let's the use `useCodeSandboxLink` for that:
-
-```jsx
-import { useCodeSandboxLink } from "@jd/sandpack-react";
-
-const CustomOpenInCSB = () => {
-  const url = useCodeSandboxLink();
-  return (
-    <a href={url} target="_blank" rel="noopener noreferrer">
-      Open in CodeSandbox
-    </a>
   );
 };
 ```
@@ -153,7 +138,7 @@ your favorite code editor. Let's connect the sandpack state to an instance of
 `useActiveCode` hook, which gives you the `code` value and the `updateCode` callback.
 
 ```jsx
-import { useActiveCode } from "@jd/sandpack-react";
+import { useActiveCode } from "@codesandbox/sandpack-react";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-textmate";

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { useSandpack } from "../hooks/useSandpack";
-import type { ViewportSize } from "../index";
+import type { ViewportSize } from "../";
 import {
+  Sandpack,
   SandpackPreview,
   SandpackProvider,
   SandpackThemeProvider,
@@ -12,21 +12,21 @@ import {
   SandpackCodeViewer,
   SandpackCodeEditor,
   SandpackTranspiledCode,
-  useCodeSandboxLink,
   useSandpackTheme,
   useActiveCode,
   useSandpackNavigation,
   SandpackStack,
-} from "../index";
-import { getThemeStyleSheet } from "../themes";
+  UnstyledOpenInCodeSandboxButton,
+} from "../";
+import { useSandpack } from "../hooks/useSandpack";
 
 export default {
-  title: "presets/Custom Sandpack",
+  title: "presets/Sandpack: custom",
 };
 
 export const UsingSandpackLayout: React.FC = () => (
-  <SandpackProvider template="react">
-    <SandpackLayout theme="codesandbox-dark">
+  <SandpackProvider>
+    <SandpackLayout>
       <SandpackStack>
         <SandpackTranspiledCode />
       </SandpackStack>
@@ -37,7 +37,7 @@ export const UsingSandpackLayout: React.FC = () => (
 
 export const UsingVisualElements: React.FC = () => (
   <SandpackProvider activePath="/App.js" template="react">
-    <SandpackThemeProvider theme="codesandbox-dark">
+    <SandpackThemeProvider>
       <SandpackCodeEditor
         customStyle={{
           width: 500,
@@ -71,27 +71,31 @@ export const UsingVisualElements: React.FC = () => (
   </SandpackProvider>
 );
 
-const CustomOpenInCSB = () => {
-  const url = useCodeSandboxLink();
-  return <a href={url}>Open in CodeSandbox</a>;
-};
-
-const CustomRefreshButton = () => {
+const CustomRefreshButton = (): JSX.Element => {
   const { refresh } = useSandpackNavigation();
+
   return (
-    <button onClick={() => refresh()} type="button">
+    <button onClick={(): void => refresh()} type="button">
       Refresh Sandpack
     </button>
   );
 };
 
-const CustomCodeEditor = () => {
+const CustomOpenInCSB = (): JSX.Element => {
+  return (
+    <UnstyledOpenInCodeSandboxButton>
+      Open in CodeSandbox
+    </UnstyledOpenInCodeSandboxButton>
+  );
+};
+
+const CustomCodeEditor = (): JSX.Element => {
   const { code, updateCode } = useActiveCode();
   const { theme } = useSandpackTheme();
 
   return (
     <textarea
-      onChange={(evt) => updateCode(evt.target.value)}
+      onChange={(evt): void => updateCode(evt.target.value)}
       style={{
         width: 400,
         height: 200,
@@ -101,7 +105,7 @@ const CustomCodeEditor = () => {
         background: theme.palette.defaultBackground,
         border: `1px solid ${theme.palette.inactiveText}`,
         color: theme.palette.activeText,
-        lineHeight: theme.typography.lineheight,
+        lineHeight: theme.typography.lineHeight,
       }}
     >
       {code}
@@ -110,7 +114,7 @@ const CustomCodeEditor = () => {
 };
 
 export const UsingHooks: React.FC = () => (
-  <SandpackProvider template="react">
+  <SandpackProvider>
     <SandpackThemeProvider>
       <CustomCodeEditor />
 
@@ -160,6 +164,7 @@ export default function KittenGallery() {
     </section>
   );
 }`;
+
 const code2 = `import React from 'react'
 
 export default function KittenGallery() {
@@ -171,12 +176,13 @@ export default function KittenGallery() {
   )
 }`;
 
-const CustomPreview = () => {
+const CustomPreview: React.FC = () => {
   const { sandpack } = useSandpack();
   const iframeRef = useRef<HTMLIFrameElement>();
 
   useEffect(() => {
     sandpack.registerBundler(iframeRef.current, "custom");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -214,7 +220,7 @@ export const JustIframe = (): React.ReactElement => {
         }}
       >
         <CustomRefreshButton />
-        <button onClick={() => setFirst(!first)} type="button">
+        <button onClick={(): void => setFirst(!first)} type="button">
           Switch
         </button>
         <CustomOpenInCSB />
@@ -230,7 +236,7 @@ export const MultiplePreviews: React.FC = () => {
 
   return (
     <>
-      <SandpackProvider template="react">
+      <SandpackProvider>
         <SandpackLayout>
           <SandpackCodeEditor />
           {previews.map((pr) => (
@@ -238,13 +244,13 @@ export const MultiplePreviews: React.FC = () => {
           ))}
         </SandpackLayout>
       </SandpackProvider>
-      <button onClick={() => setCount(count + 1)}>Add</button>
-      <button onClick={() => setCount(count - 1)}>Remove</button>
+      <button onClick={(): void => setCount(count + 1)}>Add</button>
+      <button onClick={(): void => setCount(count - 1)}>Remove</button>
     </>
   );
 };
 
-function SandpackListener() {
+const SandpackListener: React.FC = () => {
   const { listen } = useSandpack();
 
   useEffect(() => {
@@ -254,7 +260,7 @@ function SandpackListener() {
   }, [listen]);
 
   return null;
-}
+};
 
 export const MultiplePreviewsAndListeners: React.FC = () => {
   const [count, setCount] = useState(2);
@@ -275,14 +281,14 @@ export const MultiplePreviewsAndListeners: React.FC = () => {
           ))}
         </SandpackLayout>
       </SandpackProvider>
-      <button onClick={() => setCount(count + 1)}>Add</button>
-      <button onClick={() => setCount(count - 1)}>Remove</button>
+      <button onClick={(): void => setCount(count + 1)}>Add</button>
+      <button onClick={(): void => setCount(count - 1)}>Remove</button>
 
       <p>Amount of listeners: {listenersCount}</p>
-      <button onClick={() => setListenersCount(listenersCount + 1)}>
+      <button onClick={(): void => setListenersCount(listenersCount + 1)}>
         Add listener
       </button>
-      <button onClick={() => setListenersCount(listenersCount - 1)}>
+      <button onClick={(): void => setListenersCount(listenersCount - 1)}>
         Remove listener
       </button>
     </>
@@ -320,11 +326,11 @@ export const MultiplePreviewsRandomViewports: React.FC = () => {
 
   return (
     <>
-      <button onClick={() => setCount(count + 1)}>Add</button>
-      <button onClick={() => setCount(count > 0 ? count - 1 : 0)}>
+      <button onClick={(): void => setCount(count + 1)}>Add</button>
+      <button onClick={(): void => setCount(count > 0 ? count - 1 : 0)}>
         Remove
       </button>
-      <SandpackProvider template="react">
+      <SandpackProvider>
         <SandpackThemeProvider>
           <div style={{ display: "flex", alignItems: "flex-start" }}>
             <Box height={400} label="code editor" width={400}>
@@ -344,3 +350,130 @@ export const MultiplePreviewsRandomViewports: React.FC = () => {
     </>
   );
 };
+
+export const ClosableTabs: React.FC = () => (
+  <Sandpack options={{ closableTabs: true }} template="react" />
+);
+
+const ResetButtonComp: React.FC = () => {
+  const { sandpack } = useSandpack();
+
+  return (
+    <button
+      className="sp-tab-button"
+      onClick={sandpack.resetAllFiles}
+      style={{
+        background: "none",
+        border: 0,
+        position: "absolute",
+        right: "1em",
+      }}
+    >
+      Reset all file
+    </button>
+  );
+};
+
+const ResetCurrentFileButton: React.FC = () => {
+  const { sandpack } = useSandpack();
+
+  return (
+    <button
+      className="sp-tab-button"
+      onClick={(): void => sandpack.resetFile(sandpack.activePath)}
+      style={{
+        background: "none",
+        border: 0,
+        position: "absolute",
+        right: "1em",
+      }}
+    >
+      Reset current files
+    </button>
+  );
+};
+
+export const ResetButton: React.FC = () => (
+  <>
+    <SandpackProvider template="react">
+      <SandpackLayout>
+        <div
+          className="sp-stack"
+          style={{ position: "relative", width: "100%" }}
+        >
+          <SandpackCodeEditor />
+          <ResetButtonComp />
+        </div>
+        <SandpackStack>
+          <SandpackPreview />
+        </SandpackStack>
+      </SandpackLayout>
+    </SandpackProvider>
+
+    <SandpackProvider template="react">
+      <SandpackLayout>
+        <div
+          className="sp-stack"
+          style={{ position: "relative", width: "100%" }}
+        >
+          <SandpackCodeEditor />
+          <ResetCurrentFileButton />
+        </div>
+        <SandpackStack>
+          <SandpackPreview />
+        </SandpackStack>
+      </SandpackLayout>
+    </SandpackProvider>
+  </>
+);
+
+const ListenerIframeMessage = (): JSX.Element => {
+  const [message, setMessage] = useState("Hello World");
+  const { sandpack } = useSandpack();
+
+  const sender = (): void => {
+    Object.values(sandpack.clients).forEach((client) => {
+      client.iframe.contentWindow.postMessage(message, "*");
+    });
+  };
+
+  return (
+    <>
+      <button onClick={sender}>Send message</button>
+      <input
+        onChange={({ target }): void => setMessage(target.value)}
+        value={message}
+      />
+    </>
+  );
+};
+
+export const IframeMessage: React.FC = () => (
+  <SandpackProvider
+    customSetup={{
+      files: {
+        "/App.js": `import {useState, useEffect} from "react";
+
+export default function App() {
+const [message, setMessage] = useState("")
+
+useEffect(() => {
+  window.addEventListener("message", (event) => {
+    setMessage(event.data);
+  });
+}, [])
+
+return <h1>{message}</h1>
+}
+`,
+      },
+    }}
+    template="react"
+  >
+    <ListenerIframeMessage />
+    <SandpackLayout>
+      <SandpackCodeEditor />
+      <SandpackPreview />
+    </SandpackLayout>
+  </SandpackProvider>
+);

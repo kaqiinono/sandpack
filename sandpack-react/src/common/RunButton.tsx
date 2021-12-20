@@ -4,14 +4,17 @@ import * as React from "react";
 import { useSandpack } from "../hooks/useSandpack";
 import { RunIcon } from "../icons";
 
-export const RunButton: React.FC = () => {
+/**
+ * @category Components
+ */
+export const RunButton = (): JSX.Element | null => {
   const c = useClasser("sp");
   const { sandpack } = useSandpack();
 
   return (
     <button
       className={c("button")}
-      onClick={() => sandpack.runSandpack()}
+      onClick={(): void => sandpack.runSandpack()}
       style={{
         position: "absolute",
         bottom: "var(--sp-space-2)",

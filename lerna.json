@@ -7,13 +7,19 @@
   "useWorkspaces": true,
   "command": {
     "version": {
+      "createRelease": "github",
       "conventionalCommits": true,
-      "message": "chore: [skip ci] bump packages"
+      "message": "chore: [skip ci] bump packages",
+      "ignoreChanges": [
+        "**/*.md",
+        "**/*.stories.mdx",
+        "**/*.stories.@(js|jsx|ts|tsx)"
+      ]
     },
     "publish": {
       "conventionalCommits": true,
       "message": "chore: [skip ci] bump packages"
     }
   },
-  "version": "0.1.20"
+  "version": "0.10.6"
 }

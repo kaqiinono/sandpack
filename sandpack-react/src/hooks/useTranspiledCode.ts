@@ -2,7 +2,7 @@ import type { SandpackState } from "../types";
 
 import { useSandpack } from "./useSandpack";
 
-function getTranspiledCode(sandpack: SandpackState) {
+function getTranspiledCode(sandpack: SandpackState): string | null {
   const { activePath, bundlerState } = sandpack;
   if (bundlerState == null) {
     return null;
@@ -12,6 +12,9 @@ function getTranspiledCode(sandpack: SandpackState) {
   return tModule?.source?.compiledCode ?? null;
 }
 
+/**
+ * @category Hooks
+ */
 export const useTranspiledCode = (): string | null => {
   const { sandpack } = useSandpack();
   if (sandpack.status !== "running") {

@@ -6,8 +6,7 @@ import type { LanguageSupport } from "@codemirror/language";
 import type { Extension } from "@codemirror/state";
 import type { Text } from "@codemirror/text";
 import { EditorView } from "@codemirror/view";
-import type { Ref } from "react";
-import { useCallback } from "react";
+import * as React from "react";
 
 import { getSyntaxStyle } from "../../themes";
 import type { SandpackTheme } from "../../types";
@@ -29,7 +28,7 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
       height: "100%",
     },
 
-    "&.cm-focused": {
+    "&.cm-editor.cm-focused": {
       outline: "none",
     },
 
@@ -140,6 +139,7 @@ export const getCodeMirrorLanguage = (
       return javascript({ jsx: true, typescript: true });
     case "vue":
     case "html":
+    case "svelte":
       return html();
     case "css":
     case "scss":
@@ -152,9 +152,9 @@ export const getCodeMirrorLanguage = (
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useCombinedRefs = <T extends any>(
-  ...refs: Array<Ref<T>>
-): Ref<T> =>
-  useCallback(
+  ...refs: Array<React.Ref<T>>
+): React.Ref<T> =>
+  React.useCallback(
     (element: T) =>
       refs.forEach((ref) => {
         if (!ref) {
@@ -171,5 +171,6 @@ export const useCombinedRefs = <T extends any>(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (ref as any).current = element;
       }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     refs
   );

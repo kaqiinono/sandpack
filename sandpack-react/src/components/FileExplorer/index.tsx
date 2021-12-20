@@ -5,7 +5,10 @@ import { useSandpack } from "../../hooks/useSandpack";
 import { ModuleList } from "./ModuleList";
 
 // WIP
-export const FileExplorer: React.FC = () => {
+/**
+ * @category Components
+ */
+export const FileExplorer = (): JSX.Element => {
   const { sandpack } = useSandpack();
 
   return (

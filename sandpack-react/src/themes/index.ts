@@ -7,7 +7,10 @@ import type {
 import { getDarkModePreference } from "../utils/domUtils";
 import { hexToCSSRGBa } from "../utils/stringUtils";
 
-export const codesandboxLightTheme: SandpackTheme = {
+/**
+ * @category Theme
+ */
+export const defaultLight: SandpackTheme = {
   palette: {
     activeText: "#1f2933",
     defaultText: "#757678",
@@ -40,6 +43,81 @@ export const codesandboxLightTheme: SandpackTheme = {
   },
 };
 
+/**
+ * @category Theme
+ */
+export const defaultDark: SandpackTheme = {
+  palette: {
+    activeText: "#FFFFFF",
+    defaultText: "#999999",
+    inactiveText: "#343434",
+    activeBackground: "#343434",
+    defaultBackground: "#040404",
+    inputBackground: "#242424",
+    accent: "#6caedd",
+    errorBackground: "#ffcdca",
+    errorForeground: "#811e18",
+  },
+  syntax: {
+    plain: "#FFFFFF",
+    comment: { color: "#757575", fontStyle: "italic" },
+    keyword: "#77B7D7",
+    tag: "#DFAB5C",
+    punctuation: "#ffffff",
+    definition: "#86D9CA",
+    property: "#77B7D7",
+    static: "#C64640",
+    string: "#977CDC",
+  },
+  typography: {
+    bodyFont:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    monoFont:
+      '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
+    fontSize: "14px",
+    lineHeight: "1.4",
+  },
+};
+
+/**
+ * @category Theme
+ */
+export const sandpackDark: SandpackTheme = {
+  palette: {
+    activeText: "#90e86f",
+    defaultText: "#5a5a5a",
+    inactiveText: "#1a1a1a",
+    activeBackground: "#272727",
+    defaultBackground: "#151515",
+    inputBackground: "#2e2e2e",
+    accent: "#90e86f",
+    errorBackground: "#dac1fb",
+    errorForeground: "#b08df8",
+  },
+  syntax: {
+    plain: "#f0fdaf",
+    comment: { color: "#757575", fontStyle: "italic" },
+    keyword: "#e5fd78",
+    tag: "#f0fdaf",
+    punctuation: "#ffffff",
+    definition: "#eeeeee",
+    property: "#90e86f",
+    static: "#ffffff",
+    string: "#dafecf",
+  },
+  typography: {
+    bodyFont:
+      'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    monoFont:
+      '"Fira Code", "Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
+    fontSize: "14px",
+    lineHeight: "1.6",
+  },
+};
+
+/**
+ * @category Theme
+ */
 export const aquaBlueTheme: SandpackTheme = {
   palette: {
     activeText: "#1f2933",
@@ -74,6 +152,9 @@ export const aquaBlueTheme: SandpackTheme = {
   },
 };
 
+/**
+ * @category Theme
+ */
 export const githubLightTheme: SandpackTheme = {
   palette: {
     activeText: "#24292e",
@@ -110,39 +191,9 @@ export const githubLightTheme: SandpackTheme = {
   },
 };
 
-export const codesandboxDarkTheme: SandpackTheme = {
-  palette: {
-    activeText: "#FFFFFF",
-    defaultText: "#999999",
-    inactiveText: "#343434",
-    activeBackground: "#343434",
-    defaultBackground: "#040404",
-    inputBackground: "#242424",
-    accent: "#6caedd",
-    errorBackground: "#ffcdca",
-    errorForeground: "#811e18",
-  },
-  syntax: {
-    plain: "#FFFFFF",
-    comment: { color: "#757575", fontStyle: "italic" },
-    keyword: "#77B7D7",
-    tag: "#DFAB5C",
-    punctuation: "#ffffff",
-    definition: "#86D9CA",
-    property: "#77B7D7",
-    static: "#C64640",
-    string: "#977CDC",
-  },
-  typography: {
-    bodyFont:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    monoFont:
-      '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
-    fontSize: "14px",
-    lineHeight: "1.4",
-  },
-};
-
+/**
+ * @category Theme
+ */
 export const nightOwlTheme: SandpackTheme = {
   palette: {
     activeText: "rgb(197, 228, 253)",
@@ -176,6 +227,9 @@ export const nightOwlTheme: SandpackTheme = {
   },
 };
 
+/**
+ * @category Theme
+ */
 export const monokaiProTheme: SandpackTheme = {
   palette: {
     activeText: "rgb(252, 252, 250)",
@@ -209,23 +263,30 @@ export const monokaiProTheme: SandpackTheme = {
   },
 };
 
+/**
+ * @category Theme
+ */
 export const SANDPACK_THEMES: Record<SandpackPredefinedTheme, SandpackTheme> = {
-  "codesandbox-light": codesandboxLightTheme,
-  "codesandbox-dark": codesandboxDarkTheme,
+  light: defaultLight,
+  dark: defaultDark,
+  "sandpack-dark": sandpackDark,
   "night-owl": nightOwlTheme,
   "aqua-blue": aquaBlueTheme,
   "monokai-pro": monokaiProTheme,
   "github-light": githubLightTheme,
 };
 
+/**
+ * @category Theme
+ */
 export const createThemeObject = (
   inputTheme?: SandpackThemeProp
 ): { id: string; theme: SandpackTheme } => {
-  const defaultLightTheme = codesandboxLightTheme;
-  const defaultLightThemeKey = "codesandbox-light";
+  const defaultLightTheme = defaultLight;
+  const defaultLightThemeKey = "default";
 
-  const defaultDarkTheme = codesandboxDarkTheme;
-  const defaultDarkThemeKey = "codesandbox-dark";
+  const defaultDarkTheme = defaultDark;
+  const defaultDarkThemeKey = "default-dark";
 
   if (inputTheme === undefined) {
     return {
@@ -275,7 +336,7 @@ export const createThemeObject = (
   };
 };
 
-const simpleHashFunction = (str: string) => {
+const simpleHashFunction = (str: string): number => {
   let hash = 0;
   for (let i = 0; i < str.length; hash &= hash) {
     hash = 31 * hash + str.charCodeAt(i++);
@@ -285,6 +346,9 @@ const simpleHashFunction = (str: string) => {
 
 // inactive fg and active bg are interchangable to limit the number of colors in the theme
 // bg-default-overlay is determined by adjusting the alpha channel on the default bg to 80%
+/**
+ * @category Theme
+ */
 export const getThemeStyleSheet = (
   theme: SandpackTheme,
   themeId: string
@@ -313,6 +377,9 @@ export const getThemeStyleSheet = (
   --sp-line-height: ${theme.typography.lineHeight};
 `;
 
+/**
+ * @category Theme
+ */
 export const getSyntaxStyle = (
   token: string | SandpackSyntaxStyle
 ): SandpackSyntaxStyle => {

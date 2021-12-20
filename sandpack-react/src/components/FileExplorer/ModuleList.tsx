@@ -1,4 +1,4 @@
-import type { SandpackBundlerFiles } from "@jd/sandpack-client";
+import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
 import { Directory } from "./Directory";
